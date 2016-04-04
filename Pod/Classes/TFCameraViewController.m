@@ -369,27 +369,18 @@
 
 - (void) triggerShutterAnimation
 {
-    //get the application window
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    CATransition *shutterAnimation = [CATransition animation];
+    [shutterAnimation setDelegate:self];
+    [shutterAnimation setDuration:0.6]; //How long the shutter animation should take
+    shutterAnimation.timingFunction = UIViewAnimationCurveEaseInOut;
+    [shutterAnimation setType:@"cameraIris"];
+    [shutterAnimation setValue:@"cameraIris" forKey:@"cameraIris"];
     
-    //Adjust screen brightness
-    CGFloat currentScreenBrightness = [UIScreen mainScreen].brightness;
-    [[UIScreen mainScreen] setBrightness:0];
-    // Create a empty view with the color white.
-    UIView *flashView = [[UIView alloc] initWithFrame:window.bounds];
-    flashView.backgroundColor = [UIColor blackColor];
-    flashView.alpha = 1.0;
+    CALayer *cameraShutter = [CALayer new];
+    [cameraShutter setBounds:[UIScreen mainScreen].bounds];
     
-    // Add the flash view to the window
-    [window addSubview:flashView];
-    
-    // Fade it out and remove after animation.
-    [UIView animateWithDuration:0.05 animations:^{
-        flashView.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        [flashView removeFromSuperview];
-        [[UIScreen mainScreen] setBrightness:currentScreenBrightness];
-    }];
+    [self.view.layer addSublayer:cameraShutter];
+    [self.view.layer addAnimation:shutterAnimation forKey:@"cameraIris"];
 }
 
 - (void) toggleVideoRecording {
