@@ -59,12 +59,7 @@
 #pragma mark - Initializers
 - (instancetype) initWithInterface
 {
-    NSBundle *podBundle = [NSBundle bundleForClass:self.classForCoder];
-    NSURL *bundleURL = [podBundle URLForResource:@"TFCamera" withExtension:@"bundle"];
-    
-    NSBundle *subBundle = [NSBundle bundleWithURL:bundleURL];
-    
-    return [[TFCameraViewController alloc] initWithNibName:@"CameraOverlay" bundle:subBundle];
+    return [[TFCameraViewController alloc] initWithNibName:@"CameraOverlay" bundle:[self podBundle]];
 }
 
 #pragma mark - View Lifecycle
@@ -103,6 +98,16 @@
     
     [self.navigationController.navigationBar setHidden:YES];
     [self.navigationController.navigationBar setTranslucent:YES];
+    
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device.flashMode == AVCaptureFlashModeOff) {
+        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
+        [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
+    } else {
+        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
+        [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -369,11 +374,14 @@
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         if ([device hasFlash]) {
             [device lockForConfiguration:nil];
+            
             if (device.flashMode == AVCaptureFlashModeOff) {
-                [self.flashButton setImage:[UIImage imageNamed:@"camera-flash-on"] forState:UIControlStateNormal];
+                NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
+                [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
                 [device setFlashMode:AVCaptureFlashModeOn];
             } else {
-                [self.flashButton setImage:[UIImage imageNamed:@"camera-flash"] forState:UIControlStateNormal];
+                NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
+                [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
                 [device setFlashMode:AVCaptureFlashModeOff];
             }
             [device unlockForConfiguration];
@@ -575,6 +583,15 @@
     self.shutterButtonTimer.circleColor = [UIColor whiteColor];
     self.shutterButtonTimer.circleFillColor = [UIColor clearColor];
     self.shutterButtonTimer.circleBackgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - Helpers
+- (NSBundle *) podBundle
+{
+    NSBundle *podBundle = [NSBundle bundleForClass:self.classForCoder];
+    NSURL *bundleURL = [podBundle URLForResource:@"TFCamera" withExtension:@"bundle"];
+    
+    return [NSBundle bundleWithURL:bundleURL];
 }
 
 @end

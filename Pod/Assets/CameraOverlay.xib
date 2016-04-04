@@ -35,7 +35,7 @@
                             <rect key="frame" x="250" y="20" width="100" height="100"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKg-Kj-Cke">
-                                    <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                    <rect key="frame" x="10" y="10" width="80" height="80"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
                                         <action selector="shutterButton:" destination="-1" eventType="touchUpInside" id="z1p-4p-l3d"/>
@@ -44,10 +44,10 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="OKg-Kj-Cke" secondAttribute="trailing" constant="8" id="Aec-cO-iLu"/>
-                                <constraint firstItem="OKg-Kj-Cke" firstAttribute="leading" secondItem="SE4-Cd-72M" secondAttribute="leading" constant="8" id="AnX-dX-np1"/>
-                                <constraint firstAttribute="bottom" secondItem="OKg-Kj-Cke" secondAttribute="bottom" constant="8" id="OAv-Ml-ejk"/>
-                                <constraint firstItem="OKg-Kj-Cke" firstAttribute="top" secondItem="SE4-Cd-72M" secondAttribute="top" constant="8" id="VW4-zI-d8G"/>
+                                <constraint firstAttribute="trailing" secondItem="OKg-Kj-Cke" secondAttribute="trailing" constant="10" id="Aec-cO-iLu"/>
+                                <constraint firstItem="OKg-Kj-Cke" firstAttribute="leading" secondItem="SE4-Cd-72M" secondAttribute="leading" constant="10" id="AnX-dX-np1"/>
+                                <constraint firstAttribute="bottom" secondItem="OKg-Kj-Cke" secondAttribute="bottom" constant="10" id="OAv-Ml-ejk"/>
+                                <constraint firstItem="OKg-Kj-Cke" firstAttribute="top" secondItem="SE4-Cd-72M" secondAttribute="top" constant="10" id="VW4-zI-d8G"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiL-wd-aVq">
