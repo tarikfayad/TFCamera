@@ -32,4 +32,6 @@
 
 @property (nonatomic, weak) id<TFCameraViewControllerDelegate> delegate;
 
+- (instancetype) initWithInterface;
+
 @end

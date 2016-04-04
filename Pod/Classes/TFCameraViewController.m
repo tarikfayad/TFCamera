@@ -56,6 +56,17 @@
 
 @implementation TFCameraViewController
 
+#pragma mark - Initializers
+- (instancetype) initWithInterface
+{
+    NSBundle *podBundle = [NSBundle bundleForClass:self.classForCoder];
+    NSURL *bundleURL = [podBundle URLForResource:@"TFCamera" withExtension:@"bundle"];
+    
+    NSBundle *subBundle = [NSBundle bundleWithURL:bundleURL];
+    
+    return [[TFCameraViewController alloc] initWithNibName:@"CameraOverlay" bundle:subBundle];
+}
+
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
