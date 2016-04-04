@@ -323,6 +323,7 @@
         
         //Commit all the configuration changes at once
         [self.captureSession commitConfiguration];
+        [self triggerShutterAnimation];
     }
 }
 
@@ -360,9 +361,35 @@
                  self.capturedImage = flippedImage;
              }
              
+             [self triggerShutterAnimation];
              if ([self.delegate respondsToSelector:@selector(cameraDidTakePhoto:)]) return [self.delegate cameraDidTakePhoto:self.capturedImage];
          }];
     }
+}
+
+- (void) triggerShutterAnimation
+{
+    //get the application window
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    
+    //Adjust screen brightness
+    CGFloat currentScreenBrightness = [UIScreen mainScreen].brightness;
+    [[UIScreen mainScreen] setBrightness:0];
+    // Create a empty view with the color white.
+    UIView *flashView = [[UIView alloc] initWithFrame:window.bounds];
+    flashView.backgroundColor = [UIColor blackColor];
+    flashView.alpha = 1.0;
+    
+    // Add the flash view to the window
+    [window addSubview:flashView];
+    
+    // Fade it out and remove after animation.
+    [UIView animateWithDuration:0.05 animations:^{
+        flashView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [flashView removeFromSuperview];
+        [[UIScreen mainScreen] setBrightness:currentScreenBrightness];
+    }];
 }
 
 - (void) toggleVideoRecording {
