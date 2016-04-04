@@ -1,0 +1,809 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		32514F2923743536CE7B37877D506CFB /* TFCamera-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 95213F108947BEBBA228549D7D23198E /* TFCamera-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3554E0978D3E5EE1AD5F6257D3975B6C /* Pods-TFCamera_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECF31B69649374A3E65209DAA4A71A9 /* Pods-TFCamera_Example-dummy.m */; };
+		38DB3B57B32151348E0F3C61308EA740 /* Pods-TFCamera_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A4B221A9BC0D973DB4011C91C901334 /* Pods-TFCamera_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42FED270ED05E803A628104E397CE3DC /* Pods-TFCamera_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D67B401D4503A21ABD4D6F3A61F2262 /* Pods-TFCamera_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		597E84A81CB2ACDA008E868A /* TFCameraFocusSquare.h in Headers */ = {isa = PBXBuildFile; fileRef = 597E84A21CB2ACDA008E868A /* TFCameraFocusSquare.h */; };
+		597E84A91CB2ACDA008E868A /* TFCameraFocusSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 597E84A31CB2ACDA008E868A /* TFCameraFocusSquare.m */; };
+		597E84AA1CB2ACDA008E868A /* TFCameraViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 597E84A41CB2ACDA008E868A /* TFCameraViewController.h */; };
+		597E84AB1CB2ACDA008E868A /* TFCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 597E84A51CB2ACDA008E868A /* TFCameraViewController.m */; };
+		597E84AC1CB2ACDA008E868A /* TFSampleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 597E84A61CB2ACDA008E868A /* TFSampleViewController.h */; };
+		597E84AD1CB2ACDA008E868A /* TFSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 597E84A71CB2ACDA008E868A /* TFSampleViewController.m */; };
+		597E84B01CB2ACE6008E868A /* UIImage+FixOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = 597E84AE1CB2ACE6008E868A /* UIImage+FixOrientation.h */; };
+		597E84B11CB2ACE6008E868A /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 597E84AF1CB2ACE6008E868A /* UIImage+FixOrientation.m */; };
+		597E84B61CB2ADB6008E868A /* CameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 597E84B51CB2ADB6008E868A /* CameraOverlay.xib */; };
+		9F37A1991828DF04B48700B6ECF5DD33 /* TFCamera.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70470FF2C13321F4B6A8CB9ECDF261AA /* TFCamera.bundle */; };
+		B8825A6EBE3A5AC611A30BF03266FB36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		CF75AD8FB580EAC47D96B677430C5B12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		D185C852D065FE21DACD1B589529CCB7 /* TFCamera-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC231CF8DF251C998F3B0B26377DECB /* TFCamera-dummy.m */; };
+		F87136DD09429BF56E7B8DA575629569 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		FACBF3641BA1E0D1DA484F9BE941B02A /* Pods-TFCamera_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3EC6FFF0CD537A2C0DD0F527AA72D0 /* Pods-TFCamera_Tests-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9006C13732D8EE7B0899E234A85D4659 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A616C7FE865727A4857616FCFF3AD538;
+			remoteInfo = "TFCamera-TFCamera";
+		};
+		BCEFD93561899895B11D3818620C0806 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF2E7702E28781FDA326632947460273;
+			remoteInfo = TFCamera;
+		};
+		E2F59325A48AF3BDB1B5719BBBDB1C3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF2E7702E28781FDA326632947460273;
+			remoteInfo = TFCamera;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1C6C665F98D168C97C664275B487910E /* Pods-TFCamera_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TFCamera_Example.modulemap"; sourceTree = "<group>"; };
+		29597D81D9AAEFD2F303ADC9F1D13D46 /* TFCamera-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TFCamera-prefix.pch"; sourceTree = "<group>"; };
+		2994F7B7926FC3BAEECDCB3EA40905AD /* Pods-TFCamera_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TFCamera_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		36BAEDE754C57EE334B8466701247060 /* TFCamera.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TFCamera.xcconfig; sourceTree = "<group>"; };
+		3AD3880BBBFFFFDCD611ABF61170787C /* Pods-TFCamera_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TFCamera_Tests-resources.sh"; sourceTree = "<group>"; };
+		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		41659579ED5B0E30E4D1DB037668C523 /* TFCamera.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = TFCamera.modulemap; sourceTree = "<group>"; };
+		46A23E188ECD2334F0A38AABCA535262 /* Pods-TFCamera_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TFCamera_Tests.modulemap"; sourceTree = "<group>"; };
+		4991EDA929149CAC98982C1644B23992 /* Pods-TFCamera_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TFCamera_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4E2DA204402AFACE78A8760730080F52 /* Pods-TFCamera_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TFCamera_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		4ECAD4D4153CE629B3D29DDD70095813 /* Pods_TFCamera_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFCamera_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		597E84A21CB2ACDA008E868A /* TFCameraFocusSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCameraFocusSquare.h; sourceTree = "<group>"; };
+		597E84A31CB2ACDA008E868A /* TFCameraFocusSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCameraFocusSquare.m; sourceTree = "<group>"; };
+		597E84A41CB2ACDA008E868A /* TFCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCameraViewController.h; sourceTree = "<group>"; };
+		597E84A51CB2ACDA008E868A /* TFCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCameraViewController.m; sourceTree = "<group>"; };
+		597E84A61CB2ACDA008E868A /* TFSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSampleViewController.h; sourceTree = "<group>"; };
+		597E84A71CB2ACDA008E868A /* TFSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSampleViewController.m; sourceTree = "<group>"; };
+		597E84AE1CB2ACE6008E868A /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		597E84AF1CB2ACE6008E868A /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
+		597E84B51CB2ADB6008E868A /* CameraOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlay.xib; sourceTree = "<group>"; };
+		5D67B401D4503A21ABD4D6F3A61F2262 /* Pods-TFCamera_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TFCamera_Example-umbrella.h"; sourceTree = "<group>"; };
+		6E9493B0132229BA6C1801CA2A059B08 /* Pods-TFCamera_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TFCamera_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6F4FD0D7D4238B6CCFBC544A225C88A3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70470FF2C13321F4B6A8CB9ECDF261AA /* TFCamera.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TFCamera.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A4B221A9BC0D973DB4011C91C901334 /* Pods-TFCamera_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TFCamera_Tests-umbrella.h"; sourceTree = "<group>"; };
+		95213F108947BEBBA228549D7D23198E /* TFCamera-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TFCamera-umbrella.h"; sourceTree = "<group>"; };
+		9ECF31B69649374A3E65209DAA4A71A9 /* Pods-TFCamera_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TFCamera_Example-dummy.m"; sourceTree = "<group>"; };
+		9FCFE8E4C3222DC8D5F83078F7E22D88 /* TFCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TFCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A764A6CBF1B56B32FA5E7FD1BC26288C /* Pods_TFCamera_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFCamera_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD3EC6FFF0CD537A2C0DD0F527AA72D0 /* Pods-TFCamera_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TFCamera_Tests-dummy.m"; sourceTree = "<group>"; };
+		AE1D991885699E4CD5D7C99FF1B77233 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BFC231CF8DF251C998F3B0B26377DECB /* TFCamera-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TFCamera-dummy.m"; sourceTree = "<group>"; };
+		C364D64AA888B11B2CAF5A5387331A89 /* Pods-TFCamera_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TFCamera_Example.release.xcconfig"; sourceTree = "<group>"; };
+		CAB523D15E3141559115BC62E4CB0137 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB586C25F0F9622D2D974E8C1F54A889 /* Pods-TFCamera_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TFCamera_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		CDFE84534BB2496AB405D430D90FA933 /* Pods-TFCamera_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TFCamera_Example-resources.sh"; sourceTree = "<group>"; };
+		D56BD291564142DBB05300288D8B2649 /* Pods-TFCamera_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TFCamera_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		E3152EF8F5B79DF989F845935407DEC0 /* Pods-TFCamera_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TFCamera_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		F428273780AC94FB5C7FFF1937009421 /* Pods-TFCamera_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TFCamera_Example-frameworks.sh"; sourceTree = "<group>"; };
+		F6F6175F20C09C441696E5E5E02F6F91 /* Pods-TFCamera_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TFCamera_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		32BFFA53D84A464D6E662A845C2BE216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F87136DD09429BF56E7B8DA575629569 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		756490B88D8A991FA780909BCE2695DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8825A6EBE3A5AC611A30BF03266FB36 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B6AA48FF3F837676B2D6171960D541 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF75AD8FB580EAC47D96B677430C5B12 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D475D79A05DF373DDD2FE08241AA1437 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		002093869500544BE6AA2498626F2B2C /* Pods-TFCamera_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CAB523D15E3141559115BC62E4CB0137 /* Info.plist */,
+				46A23E188ECD2334F0A38AABCA535262 /* Pods-TFCamera_Tests.modulemap */,
+				6E9493B0132229BA6C1801CA2A059B08 /* Pods-TFCamera_Tests-acknowledgements.markdown */,
+				CB586C25F0F9622D2D974E8C1F54A889 /* Pods-TFCamera_Tests-acknowledgements.plist */,
+				AD3EC6FFF0CD537A2C0DD0F527AA72D0 /* Pods-TFCamera_Tests-dummy.m */,
+				2994F7B7926FC3BAEECDCB3EA40905AD /* Pods-TFCamera_Tests-frameworks.sh */,
+				3AD3880BBBFFFFDCD611ABF61170787C /* Pods-TFCamera_Tests-resources.sh */,
+				8A4B221A9BC0D973DB4011C91C901334 /* Pods-TFCamera_Tests-umbrella.h */,
+				F6F6175F20C09C441696E5E5E02F6F91 /* Pods-TFCamera_Tests.debug.xcconfig */,
+				E3152EF8F5B79DF989F845935407DEC0 /* Pods-TFCamera_Tests.release.xcconfig */,
+			);
+			name = "Pods-TFCamera_Tests";
+			path = "Target Support Files/Pods-TFCamera_Tests";
+			sourceTree = "<group>";
+		};
+		61E09AD33B8C704CFE60BEAED61ED509 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4ECAD4D4153CE629B3D29DDD70095813 /* Pods_TFCamera_Example.framework */,
+				A764A6CBF1B56B32FA5E7FD1BC26288C /* Pods_TFCamera_Tests.framework */,
+				70470FF2C13321F4B6A8CB9ECDF261AA /* TFCamera.bundle */,
+				9FCFE8E4C3222DC8D5F83078F7E22D88 /* TFCamera.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				A77B5A7FC249F4399E942B1B7CD38C98 /* Development Pods */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				61E09AD33B8C704CFE60BEAED61ED509 /* Products */,
+				AB99FA27520C43AA65630779C6AEC443 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		928060E12FFFC6E3E8D6A9EB5C53343A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				597E84B51CB2ADB6008E868A /* CameraOverlay.xib */,
+				AE1D991885699E4CD5D7C99FF1B77233 /* Info.plist */,
+				41659579ED5B0E30E4D1DB037668C523 /* TFCamera.modulemap */,
+				36BAEDE754C57EE334B8466701247060 /* TFCamera.xcconfig */,
+				BFC231CF8DF251C998F3B0B26377DECB /* TFCamera-dummy.m */,
+				29597D81D9AAEFD2F303ADC9F1D13D46 /* TFCamera-prefix.pch */,
+				95213F108947BEBBA228549D7D23198E /* TFCamera-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/TFCamera";
+			sourceTree = "<group>";
+		};
+		9428B91E6101BE9F9EBED0DE5F4D1498 /* Pods-TFCamera_Example */ = {
+			isa = PBXGroup;
+			children = (
+				6F4FD0D7D4238B6CCFBC544A225C88A3 /* Info.plist */,
+				1C6C665F98D168C97C664275B487910E /* Pods-TFCamera_Example.modulemap */,
+				4991EDA929149CAC98982C1644B23992 /* Pods-TFCamera_Example-acknowledgements.markdown */,
+				4E2DA204402AFACE78A8760730080F52 /* Pods-TFCamera_Example-acknowledgements.plist */,
+				9ECF31B69649374A3E65209DAA4A71A9 /* Pods-TFCamera_Example-dummy.m */,
+				F428273780AC94FB5C7FFF1937009421 /* Pods-TFCamera_Example-frameworks.sh */,
+				CDFE84534BB2496AB405D430D90FA933 /* Pods-TFCamera_Example-resources.sh */,
+				5D67B401D4503A21ABD4D6F3A61F2262 /* Pods-TFCamera_Example-umbrella.h */,
+				D56BD291564142DBB05300288D8B2649 /* Pods-TFCamera_Example.debug.xcconfig */,
+				C364D64AA888B11B2CAF5A5387331A89 /* Pods-TFCamera_Example.release.xcconfig */,
+			);
+			name = "Pods-TFCamera_Example";
+			path = "Target Support Files/Pods-TFCamera_Example";
+			sourceTree = "<group>";
+		};
+		A77B5A7FC249F4399E942B1B7CD38C98 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BF41BB7CBA39C8F6827628D792D00287 /* TFCamera */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		AB99FA27520C43AA65630779C6AEC443 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9428B91E6101BE9F9EBED0DE5F4D1498 /* Pods-TFCamera_Example */,
+				002093869500544BE6AA2498626F2B2C /* Pods-TFCamera_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		B079075D6784A5E16F65CBB41DF03852 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				D1A0D56581BC203B57DEF11268E35C50 /* Classes */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF41BB7CBA39C8F6827628D792D00287 /* TFCamera */ = {
+			isa = PBXGroup;
+			children = (
+				B079075D6784A5E16F65CBB41DF03852 /* Pod */,
+				928060E12FFFC6E3E8D6A9EB5C53343A /* Support Files */,
+			);
+			name = TFCamera;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D1A0D56581BC203B57DEF11268E35C50 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				597E84A21CB2ACDA008E868A /* TFCameraFocusSquare.h */,
+				597E84A31CB2ACDA008E868A /* TFCameraFocusSquare.m */,
+				597E84A41CB2ACDA008E868A /* TFCameraViewController.h */,
+				597E84A51CB2ACDA008E868A /* TFCameraViewController.m */,
+				597E84A61CB2ACDA008E868A /* TFSampleViewController.h */,
+				597E84A71CB2ACDA008E868A /* TFSampleViewController.m */,
+				597E84AE1CB2ACE6008E868A /* UIImage+FixOrientation.h */,
+				597E84AF1CB2ACE6008E868A /* UIImage+FixOrientation.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		70E3CB995C011C0B6AB563ADE062FB7D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32514F2923743536CE7B37877D506CFB /* TFCamera-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB610E93ACB4E871DDB06FFB5DD6421 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38DB3B57B32151348E0F3C61308EA740 /* Pods-TFCamera_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8ADFD6231093493DE494D52B1192544 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42FED270ED05E803A628104E397CE3DC /* Pods-TFCamera_Example-umbrella.h in Headers */,
+				597E84AC1CB2ACDA008E868A /* TFSampleViewController.h in Headers */,
+				597E84A81CB2ACDA008E868A /* TFCameraFocusSquare.h in Headers */,
+				597E84B01CB2ACE6008E868A /* UIImage+FixOrientation.h in Headers */,
+				597E84AA1CB2ACDA008E868A /* TFCameraViewController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4ED79E72EE603EE45C20D8E731282C15 /* Pods-TFCamera_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CC288629CAE8EF9F8E3C085642CF07D /* Build configuration list for PBXNativeTarget "Pods-TFCamera_Tests" */;
+			buildPhases = (
+				9E0DA84DABDD06144CA078DB640BD2E5 /* Sources */,
+				32BFFA53D84A464D6E662A845C2BE216 /* Frameworks */,
+				7EB610E93ACB4E871DDB06FFB5DD6421 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49236BEF3C55FF57AD92212C81B91EB5 /* PBXTargetDependency */,
+			);
+			name = "Pods-TFCamera_Tests";
+			productName = "Pods-TFCamera_Tests";
+			productReference = A764A6CBF1B56B32FA5E7FD1BC26288C /* Pods_TFCamera_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		78AC69B6331889C24D37E5EB5F269BD5 /* Pods-TFCamera_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D41A63F23F1D4D7F4324A671B3CF3A64 /* Build configuration list for PBXNativeTarget "Pods-TFCamera_Example" */;
+			buildPhases = (
+				DE341351B10E148F983C122BD8C4C95A /* Sources */,
+				A9B6AA48FF3F837676B2D6171960D541 /* Frameworks */,
+				B8ADFD6231093493DE494D52B1192544 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				548033FA36CCEB85907C22D57A47A919 /* PBXTargetDependency */,
+			);
+			name = "Pods-TFCamera_Example";
+			productName = "Pods-TFCamera_Example";
+			productReference = 4ECAD4D4153CE629B3D29DDD70095813 /* Pods_TFCamera_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A616C7FE865727A4857616FCFF3AD538 /* TFCamera-TFCamera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8FCC4560B3BA214AC717753587D9ADF3 /* Build configuration list for PBXNativeTarget "TFCamera-TFCamera" */;
+			buildPhases = (
+				5F029592D7CBA8341D4B30E18C85B066 /* Sources */,
+				D475D79A05DF373DDD2FE08241AA1437 /* Frameworks */,
+				36BED13A5D151924AA5DB50BD5174ED3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TFCamera-TFCamera";
+			productName = "TFCamera-TFCamera";
+			productReference = 70470FF2C13321F4B6A8CB9ECDF261AA /* TFCamera.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		BF2E7702E28781FDA326632947460273 /* TFCamera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BD810F3B08C0E74300BC51BD057C93C /* Build configuration list for PBXNativeTarget "TFCamera" */;
+			buildPhases = (
+				F14DBE9BEB038E7764A3F33108B8629F /* Sources */,
+				756490B88D8A991FA780909BCE2695DC /* Frameworks */,
+				118F7F14486B9FAED1B84B896B4742DA /* Resources */,
+				70E3CB995C011C0B6AB563ADE062FB7D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8C40A1DB4C32C63C1A237CCDE5746B7 /* PBXTargetDependency */,
+			);
+			name = TFCamera;
+			productName = TFCamera;
+			productReference = 9FCFE8E4C3222DC8D5F83078F7E22D88 /* TFCamera.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 61E09AD33B8C704CFE60BEAED61ED509 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				78AC69B6331889C24D37E5EB5F269BD5 /* Pods-TFCamera_Example */,
+				4ED79E72EE603EE45C20D8E731282C15 /* Pods-TFCamera_Tests */,
+				BF2E7702E28781FDA326632947460273 /* TFCamera */,
+				A616C7FE865727A4857616FCFF3AD538 /* TFCamera-TFCamera */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		118F7F14486B9FAED1B84B896B4742DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F37A1991828DF04B48700B6ECF5DD33 /* TFCamera.bundle in Resources */,
+				597E84B61CB2ADB6008E868A /* CameraOverlay.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36BED13A5D151924AA5DB50BD5174ED3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5F029592D7CBA8341D4B30E18C85B066 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E0DA84DABDD06144CA078DB640BD2E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FACBF3641BA1E0D1DA484F9BE941B02A /* Pods-TFCamera_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE341351B10E148F983C122BD8C4C95A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				597E84AB1CB2ACDA008E868A /* TFCameraViewController.m in Sources */,
+				597E84A91CB2ACDA008E868A /* TFCameraFocusSquare.m in Sources */,
+				597E84AD1CB2ACDA008E868A /* TFSampleViewController.m in Sources */,
+				597E84B11CB2ACE6008E868A /* UIImage+FixOrientation.m in Sources */,
+				3554E0978D3E5EE1AD5F6257D3975B6C /* Pods-TFCamera_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F14DBE9BEB038E7764A3F33108B8629F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D185C852D065FE21DACD1B589529CCB7 /* TFCamera-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		49236BEF3C55FF57AD92212C81B91EB5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TFCamera;
+			target = BF2E7702E28781FDA326632947460273 /* TFCamera */;
+			targetProxy = BCEFD93561899895B11D3818620C0806 /* PBXContainerItemProxy */;
+		};
+		548033FA36CCEB85907C22D57A47A919 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TFCamera;
+			target = BF2E7702E28781FDA326632947460273 /* TFCamera */;
+			targetProxy = E2F59325A48AF3BDB1B5719BBBDB1C3B /* PBXContainerItemProxy */;
+		};
+		D8C40A1DB4C32C63C1A237CCDE5746B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "TFCamera-TFCamera";
+			target = A616C7FE865727A4857616FCFF3AD538 /* TFCamera-TFCamera */;
+			targetProxy = 9006C13732D8EE7B0899E234A85D4659 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		03CA91998D6773EC5D02B3DB87B8353E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0B57334D6C23DADAA4F7D802A5760EB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		118FC1D64A07014FEBF99124B4AE5A54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D56BD291564142DBB05300288D8B2649 /* Pods-TFCamera_Example.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TFCamera_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TFCamera_Example/Pods-TFCamera_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_TFCamera_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		463B49563DD921E459823798CCC64C02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3152EF8F5B79DF989F845935407DEC0 /* Pods-TFCamera_Tests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TFCamera_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TFCamera_Tests/Pods-TFCamera_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_TFCamera_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		54C00137984C23965834D79EFFD01A1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36BAEDE754C57EE334B8466701247060 /* TFCamera.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = TFCamera;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		5E3979B3D2FA90930A988002B672733F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6F6175F20C09C441696E5E5E02F6F91 /* Pods-TFCamera_Tests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TFCamera_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TFCamera_Tests/Pods-TFCamera_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_TFCamera_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		60FBEF4BB7DFA4C84831C41AAEF148ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36BAEDE754C57EE334B8466701247060 /* TFCamera.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TFCamera/TFCamera-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TFCamera/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/TFCamera/TFCamera.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = TFCamera;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9016A206C7252FCB0FE0C015839580BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36BAEDE754C57EE334B8466701247060 /* TFCamera.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/TFCamera/TFCamera-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TFCamera/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/TFCamera/TFCamera.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = TFCamera;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B1FB7A4C97FDFEBE8461E1F15504BC64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36BAEDE754C57EE334B8466701247060 /* TFCamera.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = TFCamera;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		CF4B69106E05FEE2F6038967CF22A179 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C364D64AA888B11B2CAF5A5387331A89 /* Pods-TFCamera_Example.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TFCamera_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TFCamera_Example/Pods-TFCamera_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_TFCamera_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B57334D6C23DADAA4F7D802A5760EB2 /* Debug */,
+				03CA91998D6773EC5D02B3DB87B8353E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BD810F3B08C0E74300BC51BD057C93C /* Build configuration list for PBXNativeTarget "TFCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60FBEF4BB7DFA4C84831C41AAEF148ED /* Debug */,
+				9016A206C7252FCB0FE0C015839580BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8FCC4560B3BA214AC717753587D9ADF3 /* Build configuration list for PBXNativeTarget "TFCamera-TFCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1FB7A4C97FDFEBE8461E1F15504BC64 /* Debug */,
+				54C00137984C23965834D79EFFD01A1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CC288629CAE8EF9F8E3C085642CF07D /* Build configuration list for PBXNativeTarget "Pods-TFCamera_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E3979B3D2FA90930A988002B672733F /* Debug */,
+				463B49563DD921E459823798CCC64C02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D41A63F23F1D4D7F4324A671B3CF3A64 /* Build configuration list for PBXNativeTarget "Pods-TFCamera_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				118FC1D64A07014FEBF99124B4AE5A54 /* Debug */,
+				CF4B69106E05FEE2F6038967CF22A179 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

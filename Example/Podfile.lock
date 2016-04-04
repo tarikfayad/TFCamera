@@ -1,0 +1,14 @@
+PODS:
+  - TFCamera (0.1.0)
+
+DEPENDENCIES:
+  - TFCamera (from `../`)
+
+EXTERNAL SOURCES:
+  TFCamera:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TFCamera: b7e36da9cdd077d5b5e938eafa727b7ed10f1798
+
+COCOAPODS: 0.39.0
