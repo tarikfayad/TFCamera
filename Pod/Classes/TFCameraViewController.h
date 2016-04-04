@@ -32,6 +32,13 @@
 
 @property (nonatomic, weak) id<TFCameraViewControllerDelegate> delegate;
 
+@property (nonatomic) BOOL enableDoubleTapSwitch;
+@property (nonatomic) BOOL enableSelfieFlash;
+
+
+/*!
+ This is the default instantion method. Incudes regular and selfie flash, video recording, camera swapping, tap to focus, and doubletap to switch cameras.
+ */
 - (instancetype) initWithInterface;
 
 @end

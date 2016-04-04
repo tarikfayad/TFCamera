@@ -59,7 +59,10 @@
 #pragma mark - Initializers
 - (instancetype) initWithInterface
 {
-    return [[TFCameraViewController alloc] initWithNibName:@"CameraOverlay" bundle:[self podBundle]];
+    TFCameraViewController *cameraViewController = [[TFCameraViewController alloc] initWithNibName:@"CameraOverlay" bundle:[self podBundle]];
+    self.enableSelfieFlash = YES;
+    self.enableDoubleTapSwitch = YES;
+    return cameraViewController;
 }
 
 #pragma mark - View Lifecycle
@@ -125,6 +128,13 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     self.isVideoCamera = NO;
     self.capturedImage = nil;
+    
+    if (self.enableDoubleTapSwitch) {
+        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(swapCameraButton:)];
+        doubleTap.numberOfTapsRequired = 2;
+        
+        [self.view addGestureRecognizer:doubleTap];
+    }
 }
 
 
@@ -274,7 +284,7 @@
 }
 
 #pragma mark - UIButton methods
-- (IBAction)swapCameraButton:(UIButton *)sender {
+- (IBAction)swapCameraButton:(id *)sender {
     //Change camera source
     if(self.captureSession)
     {
@@ -334,7 +344,8 @@
         
         if([videoConnection isVideoOrientationSupported]) [videoConnection setVideoOrientation:[UIDevice currentDevice].orientation];
         
-        if (self.selfieMode) [self triggerSelfieFlash];
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if (self.selfieMode && self.enableSelfieFlash && device.flashMode == AVCaptureFlashModeOn) [self triggerSelfieFlash];
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler: ^(CMSampleBufferRef imageSampleBuffer, NSError *error)
          {
              NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];

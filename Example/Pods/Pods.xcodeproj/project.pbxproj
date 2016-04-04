@@ -15,8 +15,6 @@
 		597E84A91CB2ACDA008E868A /* TFCameraFocusSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 597E84A31CB2ACDA008E868A /* TFCameraFocusSquare.m */; };
 		597E84AA1CB2ACDA008E868A /* TFCameraViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 597E84A41CB2ACDA008E868A /* TFCameraViewController.h */; };
 		597E84AB1CB2ACDA008E868A /* TFCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 597E84A51CB2ACDA008E868A /* TFCameraViewController.m */; };
-		597E84AC1CB2ACDA008E868A /* TFSampleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 597E84A61CB2ACDA008E868A /* TFSampleViewController.h */; };
-		597E84AD1CB2ACDA008E868A /* TFSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 597E84A71CB2ACDA008E868A /* TFSampleViewController.m */; };
 		597E84B01CB2ACE6008E868A /* UIImage+FixOrientation.h in Headers */ = {isa = PBXBuildFile; fileRef = 597E84AE1CB2ACE6008E868A /* UIImage+FixOrientation.h */; };
 		597E84B11CB2ACE6008E868A /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 597E84AF1CB2ACE6008E868A /* UIImage+FixOrientation.m */; };
 		597E84B61CB2ADB6008E868A /* CameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 597E84B51CB2ADB6008E868A /* CameraOverlay.xib */; };
@@ -68,8 +66,6 @@
 		597E84A31CB2ACDA008E868A /* TFCameraFocusSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCameraFocusSquare.m; sourceTree = "<group>"; };
 		597E84A41CB2ACDA008E868A /* TFCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCameraViewController.h; sourceTree = "<group>"; };
 		597E84A51CB2ACDA008E868A /* TFCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCameraViewController.m; sourceTree = "<group>"; };
-		597E84A61CB2ACDA008E868A /* TFSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSampleViewController.h; sourceTree = "<group>"; };
-		597E84A71CB2ACDA008E868A /* TFSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSampleViewController.m; sourceTree = "<group>"; };
 		597E84AE1CB2ACE6008E868A /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
 		597E84AF1CB2ACE6008E868A /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 		597E84B51CB2ADB6008E868A /* CameraOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlay.xib; sourceTree = "<group>"; };
@@ -262,8 +258,6 @@
 				597E84A31CB2ACDA008E868A /* TFCameraFocusSquare.m */,
 				597E84A41CB2ACDA008E868A /* TFCameraViewController.h */,
 				597E84A51CB2ACDA008E868A /* TFCameraViewController.m */,
-				597E84A61CB2ACDA008E868A /* TFSampleViewController.h */,
-				597E84A71CB2ACDA008E868A /* TFSampleViewController.m */,
 				597E84AE1CB2ACE6008E868A /* UIImage+FixOrientation.h */,
 				597E84AF1CB2ACE6008E868A /* UIImage+FixOrientation.m */,
 			);
@@ -294,7 +288,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				42FED270ED05E803A628104E397CE3DC /* Pods-TFCamera_Example-umbrella.h in Headers */,
-				597E84AC1CB2ACDA008E868A /* TFSampleViewController.h in Headers */,
 				597E84A81CB2ACDA008E868A /* TFCameraFocusSquare.h in Headers */,
 				597E84B01CB2ACE6008E868A /* UIImage+FixOrientation.h in Headers */,
 				597E84AA1CB2ACDA008E868A /* TFCameraViewController.h in Headers */,
@@ -446,7 +439,6 @@
 			files = (
 				597E84AB1CB2ACDA008E868A /* TFCameraViewController.m in Sources */,
 				597E84A91CB2ACDA008E868A /* TFCameraFocusSquare.m in Sources */,
-				597E84AD1CB2ACDA008E868A /* TFSampleViewController.m in Sources */,
 				597E84B11CB2ACE6008E868A /* UIImage+FixOrientation.m in Sources */,
 				3554E0978D3E5EE1AD5F6257D3975B6C /* Pods-TFCamera_Example-dummy.m in Sources */,
 			);
