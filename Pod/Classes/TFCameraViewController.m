@@ -16,6 +16,7 @@
 #import <pop/POP.h>
 
 #define VIDEO_LENGTH 16
+#define SHUTTER_SPEED .15f
 
 @interface TFCameraViewController () <AVCaptureFileOutputRecordingDelegate>
 
@@ -59,8 +60,6 @@
 - (instancetype) initWithInterface
 {
     TFCameraViewController *cameraViewController = [[TFCameraViewController alloc] initWithNibName:@"CameraOverlay" bundle:[self podBundle]];
-    self.enableSelfieFlash = YES;
-    self.enableDoubleTapSwitch = YES;
     return cameraViewController;
 }
 
@@ -75,6 +74,8 @@
     } else {
         //Setup everything else as normal
         self.selfieMode = NO;
+        self.enableSelfieFlash = YES;
+        self.enableDoubleTapSwitch = YES;
         [self setupView];
         [self setupCaptureSession];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotateFromInterfaceOrientation:) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -103,13 +104,12 @@
     
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if (device.flashMode == AVCaptureFlashModeOff) {
-        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
-        [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
-    } else {
         NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
         [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
+    } else {
+        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
+        [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -299,6 +299,9 @@
     //Change camera source
     if(self.captureSession)
     {
+        //Start the screen flash
+        [self triggerShutterAnimation];
+        
         //Indicate that some changes will be made to the session
         [self.captureSession beginConfiguration];
         
@@ -334,7 +337,6 @@
         
         //Commit all the configuration changes at once
         [self.captureSession commitConfiguration];
-        [self triggerShutterAnimation];
     }
 }
 
@@ -404,10 +406,7 @@
     //get the application window
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     
-    //Adjust screen brightness
-    CGFloat currentScreenBrightness = [UIScreen mainScreen].brightness;
-    [[UIScreen mainScreen] setBrightness:0];
-    // Create a empty view with the color white.
+    // Create a empty view with the color black.
     UIView *flashView = [[UIView alloc] initWithFrame:window.bounds];
     flashView.backgroundColor = [UIColor blackColor];
     flashView.alpha = 1.0;
@@ -416,11 +415,10 @@
     [window addSubview:flashView];
     
     // Fade it out and remove after animation.
-    [UIView animateWithDuration:0.05 animations:^{
+    [UIView animateWithDuration:SHUTTER_SPEED animations:^{
         flashView.alpha = 0.0;
     } completion:^(BOOL finished) {
         [flashView removeFromSuperview];
-        [[UIScreen mainScreen] setBrightness:currentScreenBrightness];
     }];
 }
 
