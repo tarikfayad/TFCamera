@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = "TFCamera is a very simple camera component that takes both photos and videos with both camera on the iPhone. It includes doubletapping on the screen to swap cameras, selfie flash, and tap to focus."
+  s.description      = "Based on the Snapchat camera, TFCamera is a very simple camera component that takes both photos and videos with both camera on the iPhone. It includes doubletapping on the screen to swap cameras, selfie flash, and tap to focus."
 
   s.homepage         = "https://github.com/tarikfayad/TFCamera"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"

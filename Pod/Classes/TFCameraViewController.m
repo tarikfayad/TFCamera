@@ -672,7 +672,8 @@
     return [NSBundle bundleWithURL:bundleURL];
 }
 
--(bool)isOnPhoneCall {
+-(bool)isOnPhoneCall
+{
     // Returns TRUE/YES if the user is currently on a phone call
     CTCallCenter *callCenter = [CTCallCenter new];
     for (CTCall *call in callCenter.currentCalls)  {
