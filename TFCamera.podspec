@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit', 'AVFoundation', 'AssetsLibrary'
+  s.frameworks = 'UIKit', 'AVFoundation', 'AssetsLibrary', 'CoreTelephony'
   s.dependency 'pop', '~> 1.0'
   s.dependency 'JWGCircleCounter', '~> 0.2'
 end

@@ -12,6 +12,8 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CoreTelephony/CTCallCenter.h>
+#import <CoreTelephony/CTCall.h>
 #import <JWGCircleCounter/JWGCircleCounter.h>
 #import <pop/POP.h>
 
@@ -483,108 +485,116 @@
 }
 
 - (void) handleVideoLongpress: (UILongPressGestureRecognizer *)longpress {
-    if (longpress.state == UIGestureRecognizerStateBegan) {
-        if (!self.isVideoCamera) {
-            self.shutterButton.backgroundColor = [UIColor redColor];
-            [self.shutterButtonTimer setHidden:NO];
-            
-            if(self.captureSession) {
-                //Indicate that some changes will be made to the session
-                [self.captureSession beginConfiguration];
-                self.captureSession.sessionPreset = AVCaptureSessionPreset640x480;
+    //Stopping video if the user is on a phone call since iOS wont let it work
+    if (![self isOnPhoneCall]) {
+        if (longpress.state == UIGestureRecognizerStateBegan) {
+            if (!self.isVideoCamera) {
+                self.shutterButton.backgroundColor = [UIColor redColor];
+                [self.shutterButtonTimer setHidden:NO];
                 
-                AVCaptureInput* currentCameraInput = [self.captureSession.inputs objectAtIndex:0];
-                for (AVCaptureInput *captureInput in self.captureSession.inputs) {
-                    [self.captureSession removeInput:captureInput];
+                if(self.captureSession) {
+                    //Indicate that some changes will be made to the session
+                    [self.captureSession beginConfiguration];
+                    self.captureSession.sessionPreset = AVCaptureSessionPreset640x480;
+                    
+                    AVCaptureInput* currentCameraInput = [self.captureSession.inputs objectAtIndex:0];
+                    for (AVCaptureInput *captureInput in self.captureSession.inputs) {
+                        [self.captureSession removeInput:captureInput];
+                    }
+                    
+                    
+                    //Get currently selected camera and use for input
+                    AVCaptureDevice *videoCamera = nil;
+                    if(((AVCaptureDeviceInput*)currentCameraInput).device.position == AVCaptureDevicePositionBack)
+                    {
+                        videoCamera = [self cameraWithPosition:AVCaptureDevicePositionBack];
+                    }
+                    else
+                    {
+                        videoCamera = [self cameraWithPosition:AVCaptureDevicePositionFront];
+                    }
+                    
+                    //Add input to session
+                    AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:videoCamera error:nil];
+                    [self.captureSession addInput:newVideoInput];
+                    
+                    //Add mic input to the session
+                    AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+                    AVCaptureInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
+                    if (audioInput) {
+                        [self.captureSession addInput:audioInput];
+                    } else {
+                        [[[UIAlertView alloc] initWithTitle:@"No Sound!" message:@"It looks like we don't have access to your microphone. Please enable it in your device's settings to record video." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                        self.shutterButton.backgroundColor = [UIColor whiteColor];
+                        return;
+                    }
+                    
+                    //Add movie output to session
+                    for (AVCaptureOutput *output in self.captureSession.outputs) {
+                        [self.captureSession removeOutput:output];
+                    }
+                    
+                    self.movieOutput = [AVCaptureMovieFileOutput new];
+                    int32_t preferredTimeScale = 30; //Frames per second
+                    self.movieOutput.maxRecordedDuration = CMTimeMakeWithSeconds(VIDEO_LENGTH, preferredTimeScale); //Setting the max video length
+                    self.movieOutput.movieFragmentInterval = kCMTimeInvalid; // Makes audio work longer than 10 seconds: http://stackoverflow.com/questions/26768987/avcapturesession-audio-doesnt-work-for-long-videos
+                    [self.captureSession addOutput:self.movieOutput];
+                    
+                    //Commit all the configuration changes at once
+                    [self.captureSession commitConfiguration];
+                    
+                    self.isVideoCamera = YES;
+                    
+                    [self toggleVideoRecording];
                 }
+            }
+        } else if (longpress.state == UIGestureRecognizerStateEnded) {
+            if (self.isVideoCamera) {
+                self.shutterButton.backgroundColor = [UIColor whiteColor];
                 
-                
-                //Get currently selected camera and use for input
-                AVCaptureDevice *videoCamera = nil;
-                if(((AVCaptureDeviceInput*)currentCameraInput).device.position == AVCaptureDevicePositionBack)
-                {
-                    videoCamera = [self cameraWithPosition:AVCaptureDevicePositionBack];
+                //Change camera source
+                if(self.captureSession) {
+                    //Indicate that some changes will be made to the session
+                    [self.captureSession beginConfiguration];
+                    self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
+                    
+                    //Remove existing video/audio inputs
+                    AVCaptureInput* currentCameraInput = [self.captureSession.inputs objectAtIndex:0];
+                    for (AVCaptureInput *captureInput in self.captureSession.inputs) {
+                        [self.captureSession removeInput:captureInput];
+                    }
+                    
+                    //Remove existing outputs
+                    for (AVCaptureOutput *output in self.captureSession.outputs) {
+                        [self.captureSession removeOutput:output];
+                    }
+                    [self.captureSession addOutput:self.stillImageOutput];
+                    
+                    //Get new input
+                    AVCaptureDevice *newCamera = nil;
+                    if(((AVCaptureDeviceInput*)currentCameraInput).device.position == AVCaptureDevicePositionBack)
+                        newCamera = [self cameraWithPosition:AVCaptureDevicePositionBack];
+                    else
+                        newCamera = [self cameraWithPosition:AVCaptureDevicePositionFront];
+                    
+                    //Add input to session
+                    AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:newCamera error:nil];
+                    [self.captureSession addInput:newVideoInput];
+                    
+                    //Commit all the configuration changes at once
+                    [self.captureSession commitConfiguration];
+                    [self.shutterButtonTimer setHidden:YES];
+                    self.isVideoCamera = NO;
+                    
+                    [self toggleVideoRecording];
                 }
-                else
-                {
-                    videoCamera = [self cameraWithPosition:AVCaptureDevicePositionFront];
-                }
-                
-                //Add input to session
-                AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:videoCamera error:nil];
-                [self.captureSession addInput:newVideoInput];
-                
-                //Add mic input to the session
-                AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-                AVCaptureInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
-                if (audioInput) {
-                    [self.captureSession addInput:audioInput];
-                } else {
-                    [[[UIAlertView alloc] initWithTitle:@"No Sound!" message:@"It looks like we don't have access to your microphone. Please enable it in your device's settings to record video." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                    self.shutterButton.backgroundColor = [UIColor whiteColor];
-                    return;
-                }
-                
-                //Add movie output to session
-                for (AVCaptureOutput *output in self.captureSession.outputs) {
-                    [self.captureSession removeOutput:output];
-                }
-                
-                self.movieOutput = [AVCaptureMovieFileOutput new];
-                int32_t preferredTimeScale = 30; //Frames per second
-                self.movieOutput.maxRecordedDuration = CMTimeMakeWithSeconds(VIDEO_LENGTH, preferredTimeScale); //Setting the max video length
-                self.movieOutput.movieFragmentInterval = kCMTimeInvalid; // Makes audio work longer than 10 seconds: http://stackoverflow.com/questions/26768987/avcapturesession-audio-doesnt-work-for-long-videos
-                [self.captureSession addOutput:self.movieOutput];
-                
-                //Commit all the configuration changes at once
-                [self.captureSession commitConfiguration];
-                
-                self.isVideoCamera = YES;
-                
-                [self toggleVideoRecording];
             }
         }
-    } else if (longpress.state == UIGestureRecognizerStateEnded) {
-        if (self.isVideoCamera) {
-            self.shutterButton.backgroundColor = [UIColor whiteColor];
-            
-            //Change camera source
-            if(self.captureSession) {
-                //Indicate that some changes will be made to the session
-                [self.captureSession beginConfiguration];
-                self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
-                
-                //Remove existing video/audio inputs
-                AVCaptureInput* currentCameraInput = [self.captureSession.inputs objectAtIndex:0];
-                for (AVCaptureInput *captureInput in self.captureSession.inputs) {
-                    [self.captureSession removeInput:captureInput];
-                }
-                
-                //Remove existing outputs
-                for (AVCaptureOutput *output in self.captureSession.outputs) {
-                    [self.captureSession removeOutput:output];
-                }
-                [self.captureSession addOutput:self.stillImageOutput];
-                
-                //Get new input
-                AVCaptureDevice *newCamera = nil;
-                if(((AVCaptureDeviceInput*)currentCameraInput).device.position == AVCaptureDevicePositionBack)
-                    newCamera = [self cameraWithPosition:AVCaptureDevicePositionBack];
-                else
-                    newCamera = [self cameraWithPosition:AVCaptureDevicePositionFront];
-                
-                //Add input to session
-                AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:newCamera error:nil];
-                [self.captureSession addInput:newVideoInput];
-                
-                //Commit all the configuration changes at once
-                [self.captureSession commitConfiguration];
-                [self.shutterButtonTimer setHidden:YES];
-                self.isVideoCamera = NO;
-                
-                [self toggleVideoRecording];
-            }
-        }
+    } else {
+        UIAlertController *phoneCallAlert = [UIAlertController alertControllerWithTitle:@"No Video Access!" message:@"Hey! It looks like you're on the phone. Unfortunately we can't take video until you hang up." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [phoneCallAlert addAction:cancelAction];
+        [self presentViewController:phoneCallAlert animated:YES completion:nil];
     }
 }
 
@@ -660,6 +670,17 @@
     NSURL *bundleURL = [podBundle URLForResource:@"TFCamera" withExtension:@"bundle"];
     
     return [NSBundle bundleWithURL:bundleURL];
+}
+
+-(bool)isOnPhoneCall {
+    // Returns TRUE/YES if the user is currently on a phone call
+    CTCallCenter *callCenter = [CTCallCenter new];
+    for (CTCall *call in callCenter.currentCalls)  {
+        if (call.callState == CTCallStateConnected) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end
