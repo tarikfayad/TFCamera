@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "TFCamera"
-  s.version          = "0.1.4"
+  s.version          = "0.1.5"
   s.summary          = "A simple drop in camera component."
 
 # This description is used to generate tags and improve search results.
@@ -16,14 +16,14 @@ Pod::Spec.new do |s|
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = "A simple camera that takes both photos and videos with both camera on the iPhone. Includes selfie flash."
+  s.description      = "TFCamera is a very simple camera component that takes both photos and videos with both camera on the iPhone. It includes doubletapping on the screen to swap cameras, selfie flash, and tap to focus."
 
   s.homepage         = "https://github.com/tarikfayad/TFCamera"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Tarik Fayad" => "tarikfayad@gmail.com" }
   s.source           = { :git => "https://github.com/tarikfayad/TFCamera.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/tarikfayad'
 
   s.platform     = :ios, '8.4'
   s.requires_arc = true

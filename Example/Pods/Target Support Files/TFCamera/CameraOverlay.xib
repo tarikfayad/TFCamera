@@ -102,7 +102,7 @@
                 <outletCollection property="gestureRecognizers" destination="Xpp-mY-krL" appends="YES" id="e7N-ym-kHz"/>
             </connections>
         </view>
-        <tapGestureRecognizer id="Xpp-mY-krL" userLabel="Focus Tap Gesture Recognizer">
+        <tapGestureRecognizer delaysTouchesEnded="NO" id="Xpp-mY-krL" userLabel="Focus Tap Gesture Recognizer">
             <connections>
                 <action selector="focusCamera:" destination="-1" id="gkI-cr-ANF"/>
             </connections>
