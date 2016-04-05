@@ -354,7 +354,7 @@
             if (videoConnection) { break; }
         }
         
-        if([videoConnection isVideoOrientationSupported]) [videoConnection setVideoOrientation:[UIDevice currentDevice].orientation];
+        if([videoConnection isVideoOrientationSupported]) [videoConnection setVideoOrientation:[self convertDeviceOrientationToVideoOrientation:[UIDevice currentDevice].orientation]];
         
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         if (self.selfieMode && self.enableSelfieFlash && device.flashMode == AVCaptureFlashModeOn) [self triggerSelfieFlash];
@@ -375,6 +375,27 @@
              
              if ([self.delegate respondsToSelector:@selector(cameraDidTakePhoto:)]) return [self.delegate cameraDidTakePhoto:self.capturedImage];
          }];
+    }
+}
+
+- (AVCaptureVideoOrientation) convertDeviceOrientationToVideoOrientation: (UIDeviceOrientation) orientation {
+    
+    switch (orientation) {
+        case UIDeviceOrientationPortrait:
+            return AVCaptureVideoOrientationPortrait;
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            return AVCaptureVideoOrientationPortraitUpsideDown;
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            return AVCaptureVideoOrientationLandscapeLeft;
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            return AVCaptureVideoOrientationLandscapeRight;
+            break;
+        default:
+            return AVCaptureVideoOrientationPortrait;
+            break;
     }
 }
 
