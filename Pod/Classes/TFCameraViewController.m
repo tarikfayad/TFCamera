@@ -47,10 +47,9 @@
 @property (nonatomic) BOOL selfieMode;
 
 //IBActions for Easy Reference
-- (IBAction)swapCameraButton:(UIButton *)sender;
+- (IBAction)swapCameraButton:(id *)sender;
 - (IBAction)shutterButton:(UIButton *)sender;
 - (IBAction)flashButton:(UIButton *)sender;
-- (IBAction)focusCamera:(UITapGestureRecognizer *)sender;
 
 @end
 
@@ -134,7 +133,19 @@
         doubleTap.numberOfTapsRequired = 2;
         
         [self.view addGestureRecognizer:doubleTap];
+        
+        [self setupFocusTapWithDoubleTapSwap:doubleTap];
+    } else {
+        [self setupFocusTapWithDoubleTapSwap:nil];
     }
+}
+
+- (void) setupFocusTapWithDoubleTapSwap: (UITapGestureRecognizer *) swapGesture
+{
+    UITapGestureRecognizer *focusTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusCamera:)];
+    focusTap.numberOfTapsRequired = 1;
+    if (swapGesture) [focusTap requireGestureRecognizerToFail:swapGesture];
+    [self.view addGestureRecognizer:focusTap];
 }
 
 
@@ -182,7 +193,7 @@
 }
 
 #pragma mark - Camera Methods
-- (IBAction)focusCamera:(UITapGestureRecognizer *)sender {
+- (void)focusCamera:(UITapGestureRecognizer *)sender {
     CGPoint touchPoint = [sender locationInView:self.view];
     [self focus:touchPoint];
     

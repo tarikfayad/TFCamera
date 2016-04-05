@@ -98,15 +98,7 @@
                 <constraint firstAttribute="bottom" secondItem="LR2-RO-Dow" secondAttribute="bottom" id="YXa-F3-Qm5"/>
                 <constraint firstItem="LR2-RO-Dow" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZhB-8C-48s"/>
             </constraints>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="Xpp-mY-krL" appends="YES" id="e7N-ym-kHz"/>
-            </connections>
         </view>
-        <tapGestureRecognizer delaysTouchesEnded="NO" id="Xpp-mY-krL" userLabel="Focus Tap Gesture Recognizer">
-            <connections>
-                <action selector="focusCamera:" destination="-1" id="gkI-cr-ANF"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="camera-flash-on" width="34" height="48"/>
