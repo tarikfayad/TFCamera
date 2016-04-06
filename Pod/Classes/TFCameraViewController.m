@@ -85,7 +85,7 @@
     
     //Adding the longpress gesture recognizer for video recording
     UILongPressGestureRecognizer *videoLongpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleVideoLongpress:)];
-    videoLongpress.minimumPressDuration = 1.5;
+    videoLongpress.minimumPressDuration = .75;
     [self.shutterButton addGestureRecognizer:videoLongpress];
 }
 
@@ -140,6 +140,8 @@
     } else {
         [self setupFocusTapWithDoubleTapSwap:nil];
     }
+    
+    [self setupPinchToZoomGesture];
 }
 
 - (void) setupFocusTapWithDoubleTapSwap: (UITapGestureRecognizer *) swapGesture
@@ -148,6 +150,12 @@
     focusTap.numberOfTapsRequired = 1;
     if (swapGesture) [focusTap requireGestureRecognizerToFail:swapGesture];
     [self.view addGestureRecognizer:focusTap];
+}
+
+- (void) setupPinchToZoomGesture
+{
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchToZoomRecognizer:)];
+    [self.view addGestureRecognizer:pinch];
 }
 
 
@@ -230,6 +238,26 @@
                     [device setExposureMode:AVCaptureExposureModeAutoExpose];
                 }
                 [device unlockForConfiguration];
+            }
+        }
+    }
+}
+
+-(void) handlePinchToZoomRecognizer:(UIPinchGestureRecognizer*)pinchRecognizer {
+    const CGFloat pinchVelocityDividerFactor = 50.0f;
+    
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    if (captureDeviceClass != nil) {
+        AVCaptureDevice *device = [captureDeviceClass defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if (pinchRecognizer.state == UIGestureRecognizerStateChanged) {
+            NSError *error = nil;
+            if ([device lockForConfiguration:&error]) {
+                CGFloat desiredZoomFactor = device.videoZoomFactor + atan2f(pinchRecognizer.velocity, pinchVelocityDividerFactor);
+                // Check if desiredZoomFactor fits required range from 1.0 to activeFormat.videoMaxZoomFactor
+                device.videoZoomFactor = MAX(1.0, MIN(desiredZoomFactor, device.activeFormat.videoMaxZoomFactor));
+                [device unlockForConfiguration];
+            } else {
+                NSLog(@"error: %@", error);
             }
         }
     }
@@ -672,8 +700,7 @@
     return [NSBundle bundleWithURL:bundleURL];
 }
 
--(bool)isOnPhoneCall
-{
+-(bool)isOnPhoneCall {
     // Returns TRUE/YES if the user is currently on a phone call
     CTCallCenter *callCenter = [CTCallCenter new];
     for (CTCall *call in callCenter.currentCalls)  {
