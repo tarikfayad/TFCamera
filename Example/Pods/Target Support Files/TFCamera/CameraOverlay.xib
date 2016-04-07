@@ -24,18 +24,18 @@
                     <rect key="frame" x="0.0" y="472" width="600" height="128"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bbn-UM-kzh" customClass="JWGCircleCounter">
-                            <rect key="frame" x="250" y="20" width="100" height="100"/>
+                            <rect key="frame" x="268" y="48" width="65" height="65"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="100" id="0cy-eT-kE5"/>
-                                <constraint firstAttribute="height" constant="100" id="2fl-ER-b3l"/>
+                                <constraint firstAttribute="width" constant="65" id="0cy-eT-kE5"/>
+                                <constraint firstAttribute="height" constant="65" id="2fl-ER-b3l"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SE4-Cd-72M">
-                            <rect key="frame" x="250" y="20" width="100" height="100"/>
+                            <rect key="frame" x="268" y="48" width="65" height="65"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKg-Kj-Cke">
-                                    <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                    <rect key="frame" x="10" y="10" width="45" height="45"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
                                         <action selector="shutterButton:" destination="-1" eventType="touchUpInside" id="z1p-4p-l3d"/>
@@ -44,14 +44,14 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="OKg-Kj-Cke" secondAttribute="trailing" constant="8" id="Aec-cO-iLu"/>
-                                <constraint firstItem="OKg-Kj-Cke" firstAttribute="leading" secondItem="SE4-Cd-72M" secondAttribute="leading" constant="8" id="AnX-dX-np1"/>
-                                <constraint firstAttribute="bottom" secondItem="OKg-Kj-Cke" secondAttribute="bottom" constant="8" id="OAv-Ml-ejk"/>
-                                <constraint firstItem="OKg-Kj-Cke" firstAttribute="top" secondItem="SE4-Cd-72M" secondAttribute="top" constant="8" id="VW4-zI-d8G"/>
+                                <constraint firstAttribute="trailing" secondItem="OKg-Kj-Cke" secondAttribute="trailing" constant="10" id="Aec-cO-iLu"/>
+                                <constraint firstItem="OKg-Kj-Cke" firstAttribute="leading" secondItem="SE4-Cd-72M" secondAttribute="leading" constant="10" id="AnX-dX-np1"/>
+                                <constraint firstAttribute="bottom" secondItem="OKg-Kj-Cke" secondAttribute="bottom" constant="10" id="OAv-Ml-ejk"/>
+                                <constraint firstItem="OKg-Kj-Cke" firstAttribute="top" secondItem="SE4-Cd-72M" secondAttribute="top" constant="10" id="VW4-zI-d8G"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiL-wd-aVq">
-                            <rect key="frame" x="376" y="45" width="37" height="50"/>
+                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiL-wd-aVq">
+                            <rect key="frame" x="359" y="55" width="37" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Z70-83-Vbg"/>
                                 <constraint firstAttribute="width" constant="37" id="fI2-xW-TwT"/>
@@ -63,7 +63,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHi-VP-WPE" userLabel="Swap Camera Button">
-                            <rect key="frame" x="430" y="46" width="50" height="47"/>
+                            <rect key="frame" x="413" y="56" width="50" height="47"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="Zzp-XF-wBH"/>
                                 <constraint firstAttribute="height" constant="47" id="qHr-Or-1pQ"/>
@@ -81,12 +81,12 @@
                         <constraint firstAttribute="height" constant="128" id="DZV-Py-1Ns"/>
                         <constraint firstItem="SE4-Cd-72M" firstAttribute="height" secondItem="Bbn-UM-kzh" secondAttribute="height" id="LUt-GY-hCT"/>
                         <constraint firstItem="SE4-Cd-72M" firstAttribute="centerY" secondItem="Bbn-UM-kzh" secondAttribute="centerY" id="NMa-ae-SZf"/>
-                        <constraint firstAttribute="bottom" secondItem="yHi-VP-WPE" secondAttribute="bottom" constant="35" id="QlG-TW-MPT"/>
-                        <constraint firstAttribute="bottom" secondItem="fiL-wd-aVq" secondAttribute="bottom" constant="33" id="gfl-C7-YOQ"/>
+                        <constraint firstAttribute="bottom" secondItem="yHi-VP-WPE" secondAttribute="bottom" constant="25" id="QlG-TW-MPT"/>
+                        <constraint firstAttribute="bottom" secondItem="fiL-wd-aVq" secondAttribute="bottom" constant="23" id="gfl-C7-YOQ"/>
                         <constraint firstItem="SE4-Cd-72M" firstAttribute="centerX" secondItem="Bbn-UM-kzh" secondAttribute="centerX" id="h5c-DY-xyD"/>
                         <constraint firstItem="fiL-wd-aVq" firstAttribute="leading" secondItem="SE4-Cd-72M" secondAttribute="trailing" constant="26" id="hE5-42-GAm"/>
                         <constraint firstItem="yHi-VP-WPE" firstAttribute="leading" secondItem="fiL-wd-aVq" secondAttribute="trailing" constant="17" id="u55-Sn-eu9"/>
-                        <constraint firstAttribute="bottom" secondItem="Bbn-UM-kzh" secondAttribute="bottom" constant="8" id="wK9-tc-Oas"/>
+                        <constraint firstAttribute="bottom" secondItem="Bbn-UM-kzh" secondAttribute="bottom" constant="15" id="wK9-tc-Oas"/>
                         <constraint firstItem="SE4-Cd-72M" firstAttribute="width" secondItem="Bbn-UM-kzh" secondAttribute="width" id="zbm-VJ-sCu"/>
                     </constraints>
                 </view>
@@ -98,7 +98,15 @@
                 <constraint firstAttribute="bottom" secondItem="LR2-RO-Dow" secondAttribute="bottom" id="YXa-F3-Qm5"/>
                 <constraint firstItem="LR2-RO-Dow" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZhB-8C-48s"/>
             </constraints>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="Xpp-mY-krL" appends="YES" id="e7N-ym-kHz"/>
+            </connections>
         </view>
+        <tapGestureRecognizer id="Xpp-mY-krL" userLabel="Focus Tap Gesture Recognizer">
+            <connections>
+                <action selector="focusCamera:" destination="-1" id="gkI-cr-ANF"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="camera-flash-on" width="34" height="48"/>

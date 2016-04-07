@@ -17,10 +17,9 @@
 #import <JWGCircleCounter/JWGCircleCounter.h>
 #import <pop/POP.h>
 
-#define VIDEO_LENGTH 16
-#define SHUTTER_SPEED .15f
-
 @interface TFCameraViewController () <AVCaptureFileOutputRecordingDelegate>
+
+@property (strong, nonatomic) NSString *notificationString;
 
 //IB Outlets
 @property (weak, nonatomic) IBOutlet JWGCircleCounter *shutterButtonTimer;
@@ -71,22 +70,27 @@
     
     if (![self checkForCameraAccess]) {
         //Request audio and video access.
-        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:nil];
-        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:nil];
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            if (granted) {
+                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
+                    if (granted) {
+                        [self standardSetup];
+                    }
+                }];
+            }
+        }];
     } else {
         //Setup everything else as normal
-        self.selfieMode = NO;
-        self.enableSelfieFlash = YES;
-        self.enableDoubleTapSwitch = YES;
-        [self setupView];
-        [self setupCaptureSession];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotateFromInterfaceOrientation:) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [self standardSetup];
     }
     
     //Adding the longpress gesture recognizer for video recording
     UILongPressGestureRecognizer *videoLongpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleVideoLongpress:)];
     videoLongpress.minimumPressDuration = .75;
     [self.shutterButton addGestureRecognizer:videoLongpress];
+    [self.shutterButtonTimer setHidden:YES];
+    
+    [self setupSwapCameraButton];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -107,10 +111,16 @@
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if (device.flashMode == AVCaptureFlashModeOff) {
         NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
-        [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
+        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
+        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.flashButton.tintColor = self.appColor;
+        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
     } else {
         NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
-        [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
+        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
+        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.flashButton.tintColor = self.appColor;
+        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
     }
 }
 
@@ -123,6 +133,21 @@
 }
 
 #pragma mark - View Helper Methods
+
+- (void) standardSetup
+{
+    self.selfieMode = NO;
+    self.enableSelfieFlash = YES;
+    self.enableDoubleTapSwitch = YES;
+    
+    if (!self.appColor) self.appColor = [UIColor whiteColor];
+    if (!self.maxVideoLength) self.maxVideoLength = 16;
+    if (!self.shutterAnimationSpeed) self.shutterAnimationSpeed = .15f;
+    
+    [self setupView];
+    [self setupCaptureSession];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotateFromInterfaceOrientation:) name:UIDeviceOrientationDidChangeNotification object:nil];
+}
 
 - (void) setupView
 {
@@ -166,10 +191,19 @@
     return YES;
 }
 
+- (void) setupSwapCameraButton
+{
+    NSString *imagePath = [[self podBundle] pathForResource:@"camera-swap" ofType:@"png"];
+    UIImage *swapCameraImage = [UIImage imageWithContentsOfFile:imagePath];
+    swapCameraImage = [swapCameraImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.swapCameraButton.tintColor = self.appColor;
+    [self.swapCameraButton setImage:swapCameraImage forState:UIControlStateNormal];
+}
+
 - (void) setupCaptureSession
 {
     self.captureSession = [AVCaptureSession new];
-    self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
+    self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
     self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     [self.device lockForConfiguration:nil];
     
@@ -182,8 +216,18 @@
     [self.device unlockForConfiguration];
     
     AVCaptureInput *input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
-    
     [self.captureSession addInput:input];
+    
+    //Add mic input to the session
+    AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+    AVCaptureInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
+    if (audioInput) {
+        [self.captureSession addInput:audioInput];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"No Sound!" message:@"It looks like we don't have access to your microphone. Please enable it in your device's settings to record video." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        self.shutterButton.backgroundColor = [UIColor whiteColor];
+        return;
+    }
     
     AVCaptureVideoDataOutput *output = [AVCaptureVideoDataOutput new];
     [self. captureSession addOutput:output];
@@ -198,6 +242,12 @@
     tmpOutput.outputSettings = outputSettings;
     [self.captureSession addOutput:tmpOutput];
     self.stillImageOutput = tmpOutput;
+    
+    self.movieOutput = [AVCaptureMovieFileOutput new];
+    int32_t preferredTimeScale = 30; //Frames per second
+    self.movieOutput.maxRecordedDuration = CMTimeMakeWithSeconds(self.maxVideoLength, preferredTimeScale); //Setting the max video length
+    self.movieOutput.movieFragmentInterval = kCMTimeInvalid; // Makes audio work longer than 10 seconds: http://stackoverflow.com/questions/26768987/avcapturesession-audio-doesnt-work-for-long-videos
+    [self.captureSession addOutput:self.movieOutput];
     
     [self.captureSession startRunning];
 }
@@ -410,6 +460,39 @@
     }
 }
 
+- (void) handleVideoLongpress: (UILongPressGestureRecognizer *)longpress {
+    //Stopping video if the user is on a phone call since iOS wont let it work
+    if (![self isOnPhoneCall]) {
+        if (longpress.state == UIGestureRecognizerStateBegan) {
+            if (!self.isVideoCamera) {
+                self.shutterButton.backgroundColor = [UIColor redColor];
+                [self.shutterButtonTimer setHidden:NO];
+                
+                if(self.captureSession) {
+                    self.isVideoCamera = YES;
+                    [self toggleVideoRecording];
+                }
+            }
+        } else if (longpress.state == UIGestureRecognizerStateEnded) {
+            if (self.isVideoCamera) {
+                self.shutterButton.backgroundColor = [UIColor whiteColor];
+                
+                //Change camera source
+                if(self.captureSession) {
+                    [self.shutterButtonTimer setHidden:YES];
+                    [self toggleVideoRecording];
+                    self.isVideoCamera = NO;
+                }
+            }
+        }
+    } else {
+        UIAlertController *phoneCallAlert = [UIAlertController alertControllerWithTitle:@"No Video Access!" message:@"Hey! It looks like you're on the phone. Unfortunately we can't take video until you hang up." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [phoneCallAlert addAction:cancelAction];
+        [self presentViewController:phoneCallAlert animated:YES completion:nil];
+    }
+}
+
 - (AVCaptureVideoOrientation) convertDeviceOrientationToVideoOrientation: (UIDeviceOrientation) orientation {
     
     switch (orientation) {
@@ -445,7 +528,7 @@
     [window addSubview:flashView];
     
     // Fade it out and remove after animation.
-    [UIView animateWithDuration:SHUTTER_SPEED animations:^{
+    [UIView animateWithDuration:self.shutterAnimationSpeed animations:^{
         flashView.alpha = 0.0;
     } completion:^(BOOL finished) {
         [flashView removeFromSuperview];
@@ -457,10 +540,10 @@
         if (!self.movieOutput.isRecording) {
             NSURL *movieOutputURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), @"output.mp4"]];
             [self.movieOutput startRecordingToOutputFileURL:movieOutputURL recordingDelegate:self];
-            [self.shutterButtonTimer startWithSeconds:VIDEO_LENGTH];
+            [self.shutterButtonTimer startWithSeconds:self.maxVideoLength];
         } else {
             [self.movieOutput stopRecording];
-            [self.shutterButtonTimer startWithSeconds:VIDEO_LENGTH];
+            [self.shutterButtonTimer startWithSeconds:self.maxVideoLength];
             [self.shutterButtonTimer reset];
         }
     }
@@ -475,11 +558,17 @@
             
             if (device.flashMode == AVCaptureFlashModeOff) {
                 NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
-                [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
+                UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
+                flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                self.flashButton.tintColor = self.appColor;
+                [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
                 [device setFlashMode:AVCaptureFlashModeOn];
             } else {
                 NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
-                [self.flashButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
+                UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
+                flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                self.flashButton.tintColor = self.appColor;
+                [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
                 [device setFlashMode:AVCaptureFlashModeOff];
             }
             [device unlockForConfiguration];
@@ -510,120 +599,6 @@
         [flashView removeFromSuperview];
         [[UIScreen mainScreen] setBrightness:currentScreenBrightness];
     }];
-}
-
-- (void) handleVideoLongpress: (UILongPressGestureRecognizer *)longpress {
-    //Stopping video if the user is on a phone call since iOS wont let it work
-    if (![self isOnPhoneCall]) {
-        if (longpress.state == UIGestureRecognizerStateBegan) {
-            if (!self.isVideoCamera) {
-                self.shutterButton.backgroundColor = [UIColor redColor];
-                [self.shutterButtonTimer setHidden:NO];
-                
-                if(self.captureSession) {
-                    //Indicate that some changes will be made to the session
-                    [self.captureSession beginConfiguration];
-                    self.captureSession.sessionPreset = AVCaptureSessionPreset640x480;
-                    
-                    AVCaptureInput* currentCameraInput = [self.captureSession.inputs objectAtIndex:0];
-                    for (AVCaptureInput *captureInput in self.captureSession.inputs) {
-                        [self.captureSession removeInput:captureInput];
-                    }
-                    
-                    
-                    //Get currently selected camera and use for input
-                    AVCaptureDevice *videoCamera = nil;
-                    if(((AVCaptureDeviceInput*)currentCameraInput).device.position == AVCaptureDevicePositionBack)
-                    {
-                        videoCamera = [self cameraWithPosition:AVCaptureDevicePositionBack];
-                    }
-                    else
-                    {
-                        videoCamera = [self cameraWithPosition:AVCaptureDevicePositionFront];
-                    }
-                    
-                    //Add input to session
-                    AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:videoCamera error:nil];
-                    [self.captureSession addInput:newVideoInput];
-                    
-                    //Add mic input to the session
-                    AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-                    AVCaptureInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
-                    if (audioInput) {
-                        [self.captureSession addInput:audioInput];
-                    } else {
-                        [[[UIAlertView alloc] initWithTitle:@"No Sound!" message:@"It looks like we don't have access to your microphone. Please enable it in your device's settings to record video." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                        self.shutterButton.backgroundColor = [UIColor whiteColor];
-                        return;
-                    }
-                    
-                    //Add movie output to session
-                    for (AVCaptureOutput *output in self.captureSession.outputs) {
-                        [self.captureSession removeOutput:output];
-                    }
-                    
-                    self.movieOutput = [AVCaptureMovieFileOutput new];
-                    int32_t preferredTimeScale = 30; //Frames per second
-                    self.movieOutput.maxRecordedDuration = CMTimeMakeWithSeconds(VIDEO_LENGTH, preferredTimeScale); //Setting the max video length
-                    self.movieOutput.movieFragmentInterval = kCMTimeInvalid; // Makes audio work longer than 10 seconds: http://stackoverflow.com/questions/26768987/avcapturesession-audio-doesnt-work-for-long-videos
-                    [self.captureSession addOutput:self.movieOutput];
-                    
-                    //Commit all the configuration changes at once
-                    [self.captureSession commitConfiguration];
-                    
-                    self.isVideoCamera = YES;
-                    
-                    [self toggleVideoRecording];
-                }
-            }
-        } else if (longpress.state == UIGestureRecognizerStateEnded) {
-            if (self.isVideoCamera) {
-                self.shutterButton.backgroundColor = [UIColor whiteColor];
-                
-                //Change camera source
-                if(self.captureSession) {
-                    //Indicate that some changes will be made to the session
-                    [self.captureSession beginConfiguration];
-                    self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
-                    
-                    //Remove existing video/audio inputs
-                    AVCaptureInput* currentCameraInput = [self.captureSession.inputs objectAtIndex:0];
-                    for (AVCaptureInput *captureInput in self.captureSession.inputs) {
-                        [self.captureSession removeInput:captureInput];
-                    }
-                    
-                    //Remove existing outputs
-                    for (AVCaptureOutput *output in self.captureSession.outputs) {
-                        [self.captureSession removeOutput:output];
-                    }
-                    [self.captureSession addOutput:self.stillImageOutput];
-                    
-                    //Get new input
-                    AVCaptureDevice *newCamera = nil;
-                    if(((AVCaptureDeviceInput*)currentCameraInput).device.position == AVCaptureDevicePositionBack)
-                        newCamera = [self cameraWithPosition:AVCaptureDevicePositionBack];
-                    else
-                        newCamera = [self cameraWithPosition:AVCaptureDevicePositionFront];
-                    
-                    //Add input to session
-                    AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:newCamera error:nil];
-                    [self.captureSession addInput:newVideoInput];
-                    
-                    //Commit all the configuration changes at once
-                    [self.captureSession commitConfiguration];
-                    [self.shutterButtonTimer setHidden:YES];
-                    self.isVideoCamera = NO;
-                    
-                    [self toggleVideoRecording];
-                }
-            }
-        }
-    } else {
-        UIAlertController *phoneCallAlert = [UIAlertController alertControllerWithTitle:@"No Video Access!" message:@"Hey! It looks like you're on the phone. Unfortunately we can't take video until you hang up." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [phoneCallAlert addAction:cancelAction];
-        [self presentViewController:phoneCallAlert animated:YES completion:nil];
-    }
 }
 
 #pragma mark - Animation Methods
@@ -681,17 +656,51 @@
 #pragma mark - shutterbutton outline methods
 - (void) setupShutterButtonOutline
 {
-    self.shutterButton.layer.cornerRadius = 42.0f;
-    self.shutterButtonOutline.layer.cornerRadius = 50.0f;
+    self.shutterButton.layer.cornerRadius = 24.0f;
+    self.shutterButtonOutline.layer.cornerRadius = 32.5f;
     self.shutterButtonOutline.layer.borderColor = [UIColor whiteColor].CGColor;
     self.shutterButtonOutline.layer.borderWidth = 2.0f;
     
-    self.shutterButtonTimer.circleColor = [UIColor whiteColor];
+    self.shutterButtonTimer.circleColor = self.appColor;
     self.shutterButtonTimer.circleFillColor = [UIColor clearColor];
     self.shutterButtonTimer.circleBackgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - Helpers
+
+- (void) registerCameraForColorChangeNotification: (NSString *) notificationString
+{
+    self.notificationString = notificationString;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadViewColors) name:self.notificationString object:nil];
+}
+
+- (void) removeColorChangeNotificationFromCamera
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notificationString object:nil];
+}
+
+- (void) reloadViewColors
+{
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device.flashMode == AVCaptureFlashModeOff) {
+        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
+        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
+        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.flashButton.tintColor = self.appColor;
+        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
+    } else {
+        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
+        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
+        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.flashButton.tintColor = self.appColor;
+        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
+    }
+    
+    self.shutterButtonTimer.circleColor = self.appColor;
+    
+    [self setupSwapCameraButton];
+}
+
 - (NSBundle *) podBundle
 {
     NSBundle *podBundle = [NSBundle bundleForClass:self.classForCoder];
