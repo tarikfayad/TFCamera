@@ -50,13 +50,13 @@ It also allows for easily changing the interface color (just set the ```appColor
 ### Customization
 TFCamera has the following properties you can set to customize the camera functionality and appearance (not many yet, but more coming soon!).
 ```
-@property (nonatomic) BOOL enableDoubleTapSwitch;
-@property (nonatomic) BOOL enableSelfieFlash;
+@property (nonatomic) BOOL enableDoubleTapSwitch; //Default is YES
+@property (nonatomic) BOOL enableSelfieFlash; //Default is YES
 
 @property (nonatomic) CGFloat maxVideoLength; //Default is 16 seconds
 @property (nonatomic) CGFloat shutterAnimationSpeed; //Default is .15 seconds 
 
-@property (strong, nonatomic) UIColor *appColor;
+@property (strong, nonatomic) UIColor *appColor; //Default is white
 ```
 
 ### Author
