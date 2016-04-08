@@ -6,7 +6,7 @@ TFCamera is a very simple camera component based on Snapchat's control scheme fo
 
 ### Tech
 
-TFCamera is built off AVFoundation with speed and simplicity in mind. It doesn't have a lot of extra bells and whistles, but rather strives to be a good starting point for any app that's in need of a quick camera component as a jumping off point. For now it includes the following features:
+TFCamera is built off AVFoundation with speed and simplicity in mind. It doesn't have a lot of extra bells and whistles, but rather it strives to be a good starting point for any app that's in need of a quick camera component as a jumping off point. For now it includes the following features:
 - pinch to zoom
 - tap to focus
 - double tap to swap cameras
