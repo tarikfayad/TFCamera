@@ -2,7 +2,7 @@
 TFCamera is a very simple camera component based on Snapchat's control scheme for iOS 8+.
 
 ### Version
-0.1.10
+0.1.11
 
 ### Tech
 
