@@ -9,14 +9,16 @@
 Pod::Spec.new do |s|
   s.name             = "TFCamera"
   s.version          = "0.1.11"
-  s.summary          = "A simple drop in camera component."
+  s.summary          = "TFCamera is a very simple camera component based on Snapchat's control scheme for iOS 8+."
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = "Based on the Snapchat camera, TFCamera is a very simple camera component that takes both photos and videos with both camera on the iPhone. It includes doubletapping on the screen to swap cameras, selfie flash, and tap to focus."
+  s.description      = <<-DESC
+    "TFCamera is built off AVFoundation with speed and simplicity in mind. It doesn't have a lot of extra bells and whistles, but rather it strives to be a good starting point for any app that's in need of a quick camera component as a jumping off point. For now it includes the following features: pinch to zoom, tap to focus, double tap to swap cameras, hold shutter button to record video, selfie flash, and a basic shutter animation."
+    DESC
 
   s.homepage         = "https://github.com/tarikfayad/TFCamera"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
