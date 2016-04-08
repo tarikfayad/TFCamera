@@ -47,8 +47,9 @@
 - (instancetype) initWithInterface;
 
 /*!
- Use this method to register the camera view controller for a color change notificaiton. (all the button colors will change on the camera screen when this notification fires.
+ Use these methods to register or remove the camera view controller for a color change notificaiton (all the button colors will change on the camera screen when this notification fires).
  */
 - (void) registerCameraForColorChangeNotification: (NSString *) notificationString;
+- (void) removeColorChangeNotificationFromCamera;
 
 @end

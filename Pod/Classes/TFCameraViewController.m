@@ -107,21 +107,7 @@
     
     [self.navigationController.navigationBar setHidden:YES];
     [self.navigationController.navigationBar setTranslucent:YES];
-    
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if (device.flashMode == AVCaptureFlashModeOff) {
-        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
-        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
-        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        self.flashButton.tintColor = self.appColor;
-        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
-    } else {
-        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
-        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
-        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        self.flashButton.tintColor = self.appColor;
-        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
-    }
+    [self setupFlashButton];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -133,6 +119,28 @@
 }
 
 #pragma mark - View Helper Methods
+- (void) setupFlashButton
+{
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device.flashMode == AVCaptureFlashModeOff) {
+        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
+        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
+        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.flashButton.tintColor = self.appColor;
+        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
+        [self.flashButton setContentEdgeInsets:UIEdgeInsetsMake(10, 7, 10, 7)];
+    } else {
+        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
+        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
+        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.flashButton.tintColor = self.appColor;
+        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
+        [self.flashButton setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    }
+    
+    [self.flashButton sizeToFit];
+}
+
 
 - (void) standardSetup
 {
@@ -216,7 +224,13 @@
     [self.device unlockForConfiguration];
     
     AVCaptureInput *input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
-    [self.captureSession addInput:input];
+    if (input) {
+        [self.captureSession addInput:input];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"No Video!" message:@"It looks like we don't have access to your camera. Please enable it in your device's settings to record video or take photos." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        self.shutterButton.backgroundColor = [UIColor whiteColor];
+        return;
+    }
     
     //Add mic input to the session
     AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
@@ -681,20 +695,7 @@
 
 - (void) reloadViewColors
 {
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if (device.flashMode == AVCaptureFlashModeOff) {
-        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
-        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
-        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        self.flashButton.tintColor = self.appColor;
-        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
-    } else {
-        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
-        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
-        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        self.flashButton.tintColor = self.appColor;
-        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
-    }
+    [self setupFlashButton];
     
     self.shutterButtonTimer.circleColor = self.appColor;
     
