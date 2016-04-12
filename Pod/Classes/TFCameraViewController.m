@@ -28,6 +28,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (weak, nonatomic) IBOutlet UIButton *swapCameraButton;
 
+@property (strong, nonatomic) UIImage *flashOnImage;
+@property (strong, nonatomic) UIImage *flashOffImage;
+@property (strong, nonatomic) UIImage *swapCameraImage;
+
 //AVFoundation Properties
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *photoPreview;
@@ -107,7 +111,6 @@
     
     [self.navigationController.navigationBar setHidden:YES];
     [self.navigationController.navigationBar setTranslucent:YES];
-    [self setupFlashButton];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -123,18 +126,14 @@
 {
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if (device.flashMode == AVCaptureFlashModeOff) {
-        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
-        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
-        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.flashOffImage = [self.flashOffImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.flashButton.tintColor = self.appColor;
-        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
+        [self.flashButton setImage:self.flashOffImage forState:UIControlStateNormal];
         [self.flashButton setContentEdgeInsets:UIEdgeInsetsMake(10, 7, 10, 7)];
     } else {
-        NSString *imagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
-        UIImage *flashButtonImage = [UIImage imageWithContentsOfFile:imagePath];
-        flashButtonImage = [flashButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.flashOnImage = [self.self.flashOnImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.flashButton.tintColor = self.appColor;
-        [self.flashButton setImage:flashButtonImage forState:UIControlStateNormal];
+        [self.flashButton setImage:self.flashOnImage forState:UIControlStateNormal];
         [self.flashButton setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     }
     
@@ -155,6 +154,17 @@
     [self setupView];
     [self setupCaptureSession];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotateFromInterfaceOrientation:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    NSString *onImagePath = [[self podBundle] pathForResource:@"camera-flash" ofType:@"png"];
+    self.flashOnImage = [UIImage imageWithContentsOfFile:onImagePath];
+    
+    NSString *offImagePath = [[self podBundle] pathForResource:@"camera-flash-on" ofType:@"png"];
+    self.flashOffImage = [UIImage imageWithContentsOfFile:offImagePath];
+    
+    NSString *swapImagePath = [[self podBundle] pathForResource:@"camera-swap" ofType:@"png"];
+    self.swapCameraImage = [UIImage imageWithContentsOfFile:swapImagePath];
+    
+    [self setupFlashButton];
 }
 
 - (void) setupView
@@ -201,11 +211,9 @@
 
 - (void) setupSwapCameraButton
 {
-    NSString *imagePath = [[self podBundle] pathForResource:@"camera-swap" ofType:@"png"];
-    UIImage *swapCameraImage = [UIImage imageWithContentsOfFile:imagePath];
-    swapCameraImage = [swapCameraImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.swapCameraImage = [self.swapCameraImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.swapCameraButton.tintColor = self.appColor;
-    [self.swapCameraButton setImage:swapCameraImage forState:UIControlStateNormal];
+    [self.swapCameraButton setImage:self.swapCameraImage forState:UIControlStateNormal];
 }
 
 - (void) setupCaptureSession
@@ -678,6 +686,26 @@
     self.shutterButtonTimer.circleColor = self.appColor;
     self.shutterButtonTimer.circleFillColor = [UIColor clearColor];
     self.shutterButtonTimer.circleBackgroundColor = [UIColor clearColor];
+}
+
+#pragma mark - Change Button Images
+- (void) changeFlashOnImage: (UIImage *) flashOnImage
+{
+    
+    self.flashOnImage = flashOnImage;
+    [self setupFlashButton];
+}
+
+- (void) changeFlashOffImage: (UIImage *) flashOffImage
+{
+    self.flashOffImage = flashOffImage;
+    [self setupFlashButton];
+}
+
+- (void) changeSwapCameraImage: (UIImage *) swapCameraImage
+{
+    self.swapCameraImage = swapCameraImage;
+    [self setupSwapCameraButton];
 }
 
 #pragma mark - Helpers
