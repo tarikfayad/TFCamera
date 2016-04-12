@@ -32,13 +32,21 @@
 
 @property (nonatomic, weak) id<TFCameraViewControllerDelegate> delegate;
 
-@property (nonatomic) BOOL enableDoubleTapSwitch;
-@property (nonatomic) BOOL enableSelfieFlash;
+@property (nonatomic) BOOL enableDoubleTapSwitch; //Default is YES
+@property (nonatomic) BOOL enableSelfieFlash; //Default is YES
 
 @property (nonatomic) CGFloat maxVideoLength; //Default is 16 seconds
 @property (nonatomic) CGFloat shutterAnimationSpeed; //Default is .15 seconds
 
-@property (strong, nonatomic) UIColor *appColor;
+@property (strong, nonatomic) UIColor *appColor; //Default is white
+
+/*!
+ Use these methods to swap the button images after instantiaiton of the ViewController
+ */
+
+- (void) changeFlashOnImage: (UIImage *) flashOnImage;
+- (void) changeFlashOffImage: (UIImage *) flashOffImage;
+- (void) changeSwapCameraImage: (UIImage *) swapCameraImage;
 
 
 /*!
