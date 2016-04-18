@@ -430,12 +430,10 @@
         AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:newCamera error:nil];
         [self.captureSession addInput:newVideoInput];
         
-        if (self.isVideoCamera) {
-            //Add mic input to the session
-            AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-            AVCaptureInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
-            [self.captureSession addInput:audioInput];
-        }
+        //Add mic input to the session
+        AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        AVCaptureInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
+        [self.captureSession addInput:audioInput];
         
         //Commit all the configuration changes at once
         [self.captureSession commitConfiguration];
