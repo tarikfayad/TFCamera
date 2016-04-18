@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "TFCamera"
-  s.version          = "0.1.11"
+  s.version          = "0.1.13"
   s.summary          = "TFCamera is a very simple camera component based on Snapchat's control scheme for iOS 8+."
 
 # This description is used to generate tags and improve search results.

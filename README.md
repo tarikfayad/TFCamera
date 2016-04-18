@@ -2,7 +2,7 @@
 TFCamera is a very simple camera component based on Snapchat's control scheme for iOS 8+.
 
 ### Version
-0.1.12
+0.1.13
 
 ### Tech
 
@@ -48,7 +48,8 @@ It also allows for easily changing the interface color (just set the ```appColor
 ```
 
 ### Customization
-TFCamera has the following properties you can set to customize the camera functionality and appearance (not many yet, but more coming soon!).
+TFCamera has the following properties you can set to customize the camera functionality and appearance
+
 ```
 @property (nonatomic) BOOL enableDoubleTapSwitch; //Default is YES
 @property (nonatomic) BOOL enableSelfieFlash; //Default is YES
@@ -57,6 +58,13 @@ TFCamera has the following properties you can set to customize the camera functi
 @property (nonatomic) CGFloat shutterAnimationSpeed; //Default is .15 seconds 
 
 @property (strong, nonatomic) UIColor *appColor; //Default is white
+
+/*!
+Use these methods to swap the button images after instantiaiton of the ViewController
+*/
+- (void) changeFlashOnImage: (UIImage *) flashOnImage;
+- (void) changeFlashOffImage: (UIImage *) flashOffImage;
+- (void) changeSwapCameraImage: (UIImage *) swapCameraImage;
 ```
 
 ### Author
@@ -65,7 +73,6 @@ Tarik Fayad, [tarikfayad@gmail.com]
 ### Todos
 
  - Write Tests
- - Allow More UI Customization
  - Add Code Comments
  - Add Night Mode
 
